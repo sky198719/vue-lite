@@ -86,10 +86,6 @@ module.exports = {
         }
       },
       {
-        test:/\.js$/,
-        loader:'babel-loader'
-      },
-      {
         test:/\.(scss|css)$/,
         loader:ExtractTextPlugin.extract({
           use:[
@@ -97,6 +93,10 @@ module.exports = {
             'sass-loader'
           ]
         })
+      },
+      {
+        test:/\.js$/,
+        loader:'babel-loader'
       }
     ]
   },
