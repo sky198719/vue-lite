@@ -1,11 +1,11 @@
 const path = require('path');
-const vueLoaderPlugin = require('vue-loader/lib/plugin');
-const extractTextPlugin = require('extract-text-webpack-plugin');
-const htmlWebpackPlugin = require('html-webpack-plugin');
-const cleanWebpackPlugin = require('clean-webpack-plugin');
+const vueLoader = require('vue-loader/lib/plugin');
+const extractText = require('extract-text-webpack-plugin');
+const htmlWebpack = require('html-webpack-plugin');
+const cleanWebpack = require('clean-webpack-plugin');
 const optimizeCss = require('optimize-css-assets-webpack-plugin');
 const uglifyjs = require('uglifyjs-webpack-plugin');
-const copyWebpackPlugin = require('copy-webpack-plugin');
+const copyWebpack = require('copy-webpack-plugin');
 
 module.exports = {
   mode:'development',
@@ -13,7 +13,7 @@ module.exports = {
     index:'./src/pages/index/index.js'
   },
   output:{
-    path:__dirname + "/dist/",
+    path:__dirname + "/build/",
     filename:'[name]/[name].[hash].js'
   },
   module:{
@@ -79,7 +79,7 @@ module.exports = {
         loader:'vue-loader',
         options:{
           loaders:{
-            css:extractTextPlugin.extract({
+            css:extractText.extract({
               fallback:'vue-style-loader',
               use:'css-loader'
             })
@@ -88,7 +88,7 @@ module.exports = {
       },
       {
         test:/\.(scss|css)$/,
-        loader:extractTextPlugin.extract({
+        loader:extractText.extract({
           use:[
             'css-loader',
             'sass-loader'
@@ -102,15 +102,15 @@ module.exports = {
     ]
   },
   plugins:[
-    new htmlWebpackPlugin({
-      filename:__dirname + '/dist/index/index.html',
+    new htmlWebpack({
+      filename:__dirname + '/build/index/index.html',
       template:__dirname + '/src/pages/index/index.html',
       chunks:['index'],
       minify:{
         collapseWhitespace:true,
       }
     }),
-    new copyWebpackPlugin([
+    new copyWebpack([
       {
         from:__dirname + '/src/lib/js',
         to:'./lib/js'
@@ -124,11 +124,11 @@ module.exports = {
         to:'./lib/images'
       }
     ]),
-    new extractTextPlugin({filename:'[name]/[name].[hash].css',allChunks:true}),
-    new vueLoaderPlugin(),
+    new extractText({filename:'[name]/[name].[hash].css',allChunks:true}),
+    new vueLoader(),
     new uglifyjs(),
-    new cleanWebpackPlugin(
-      ['dist'],
+    new cleanWebpack(
+      ['build'],
       {
         root:__dirname,
         exclude:['json'],
