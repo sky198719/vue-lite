@@ -1,10 +1,11 @@
 const path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const vueLoaderPlugin = require('vue-loader/lib/plugin');
+const extractTextPlugin = require('extract-text-webpack-plugin');
+const htmlWebpackPlugin = require('html-webpack-plugin');
+const cleanWebpackPlugin = require('clean-webpack-plugin');
 const optimizeCss = require('optimize-css-assets-webpack-plugin');
 const uglifyjs = require('uglifyjs-webpack-plugin');
+const copyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode:'development',
@@ -78,7 +79,7 @@ module.exports = {
         loader:'vue-loader',
         options:{
           loaders:{
-            css:ExtractTextPlugin.extract({
+            css:extractTextPlugin.extract({
               fallback:'vue-style-loader',
               use:'css-loader'
             })
@@ -87,7 +88,7 @@ module.exports = {
       },
       {
         test:/\.(scss|css)$/,
-        loader:ExtractTextPlugin.extract({
+        loader:extractTextPlugin.extract({
           use:[
             'css-loader',
             'sass-loader'
@@ -101,7 +102,7 @@ module.exports = {
     ]
   },
   plugins:[
-    new HtmlWebpackPlugin({
+    new htmlWebpackPlugin({
       filename:__dirname + '/dist/index/index.html',
       template:__dirname + '/src/pages/index/index.html',
       chunks:['index'],
@@ -109,10 +110,24 @@ module.exports = {
         collapseWhitespace:true,
       }
     }),
-    new ExtractTextPlugin({filename:'[name]/[name].[hash].css',allChunks:true}),
-    new VueLoaderPlugin(),
+    new copyWebpackPlugin([
+      {
+        from:__dirname + '/src/lib/js',
+        to:'./lib/js'
+      },
+      {
+        from:__dirname + '/src/lib/css',
+        to:'./lib/css'
+      },
+      {
+        from:__dirname + '/src/lib/images',
+        to:'./lib/images'
+      }
+    ]),
+    new extractTextPlugin({filename:'[name]/[name].[hash].css',allChunks:true}),
+    new vueLoaderPlugin(),
     new uglifyjs(),
-    new CleanWebpackPlugin(
+    new cleanWebpackPlugin(
       ['dist'],
       {
         root:__dirname,

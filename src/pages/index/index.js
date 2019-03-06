@@ -1,5 +1,3 @@
-import Vue from 'vue';
-
 import './../../assets/css/global.scss';
 
 import Index from './index.vue';
