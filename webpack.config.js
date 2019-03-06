@@ -24,8 +24,8 @@ module.exports = {
           loader:'url-loader',
           options:{
             limit:1024,
-            outputPath:'static/img',
-            publicPath:'../static/img',
+            outputPath:'static/images',
+            publicPath:'../static/images',
             name:'[hash].[ext]'
           }
         }]
