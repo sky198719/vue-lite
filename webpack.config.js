@@ -122,6 +122,22 @@ module.exports = {
       {
         from:__dirname + '/src/lib/images',
         to:'./lib/images'
+      },
+      {
+        from:__dirname + '/src/lib/font',
+        to:'./lib/font'
+      },
+      {
+        from:__dirname + '/src/lib/video',
+        to:'./lib/video'
+      },
+      {
+        from:__dirname + '/src/lib/audio',
+        to:'./lib/audio'
+      },
+      {
+        from:__dirname + '/src/lib/doc',
+        to:'./lib/doc'
       }
     ]),
     new extractText({filename:'[name]/[name].[hash].css',allChunks:true}),
@@ -141,7 +157,7 @@ module.exports = {
       minimizer:[new optimizeCss({})],
   },
   devServer:{  
-    contentBase:"./dist/",
+    contentBase:"./build/",
     openPage:'index',
     historyApiFallback:true,
     inline:true,
