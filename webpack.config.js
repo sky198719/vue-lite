@@ -1,11 +1,12 @@
-const path = require('path');
-const vueLoader = require('vue-loader/lib/plugin');
-const extractText = require('extract-text-webpack-plugin');
-const htmlWebpack = require('html-webpack-plugin');
-const cleanWebpack = require('clean-webpack-plugin');
-const optimizeCss = require('optimize-css-assets-webpack-plugin');
-const uglifyjs = require('uglifyjs-webpack-plugin');
-const copyWebpack = require('copy-webpack-plugin');
+const path = require('path')
+const vueLoader = require('vue-loader/lib/plugin')
+const extractText = require('extract-text-webpack-plugin')
+const htmlWebpack = require('html-webpack-plugin')
+const cleanWebpack = require('clean-webpack-plugin')
+const optimizeCss = require('optimize-css-assets-webpack-plugin')
+const uglifyjs = require('uglifyjs-webpack-plugin')
+const copyWebpack = require('copy-webpack-plugin')
+// const concatPlugin = require('webpack-concat-plugin')
 
 module.exports = {
   mode:'development',
@@ -112,34 +113,16 @@ module.exports = {
     }),
     new copyWebpack([
       {
-        from:__dirname + '/src/lib/js',
-        to:'./lib/js'
-      },
-      {
-        from:__dirname + '/src/lib/css',
-        to:'./lib/css'
-      },
-      {
-        from:__dirname + '/src/lib/images',
-        to:'./lib/images'
-      },
-      {
-        from:__dirname + '/src/lib/font',
-        to:'./lib/font'
-      },
-      {
-        from:__dirname + '/src/lib/video',
-        to:'./lib/video'
-      },
-      {
-        from:__dirname + '/src/lib/audio',
-        to:'./lib/audio'
-      },
-      {
-        from:__dirname + '/src/lib/doc',
-        to:'./lib/doc'
+        from:__dirname + '/lib',
+        to:'./lib'
       }
     ]),
+    // new concatPlugin({
+    //   uglify:false,
+    //   outputPath:'lib/js/',
+    //   fileName:'lib.[hash].js',
+    //   filesToConcat:['vue','vue-router','vuex']
+    // }),
     new extractText({filename:'[name]/[name].[hash].css',allChunks:true}),
     new vueLoader(),
     new uglifyjs(),
@@ -156,7 +139,7 @@ module.exports = {
   optimization:{
       minimizer:[new optimizeCss({})],
   },
-  devServer:{  
+  devServer:{
     contentBase:"./build/",
     openPage:'index',
     historyApiFallback:true,

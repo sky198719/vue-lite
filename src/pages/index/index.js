@@ -1,21 +1,15 @@
-import './../../assets/css/global.scss';
+import './../../assets/css/global.scss'
 
-import Index from './index.vue';
+import Index from './index.vue'
+import {routePath,storeData} from './config/index.js'
 
-const routes = [
-	{
-		path:'/index',
-		name:'index',
-		component:Index
-	},
-	{
-		path: '/', 
-		name:'index',
-        redirect: '/index'
-	}
-]
+const router = new VueRouter(routePath)
+
+const store = new Vuex.Store(storeData)
 
 new Vue({
 	el:'#index',
+	router,
+	store,
 	render:h=>h(Index)
 })
