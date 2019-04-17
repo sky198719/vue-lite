@@ -14,7 +14,7 @@ module.exports = {
     index:'./src/pages/index/index.js'
   },
   output:{
-    path:__dirname + "/build/",
+    path:__dirname + '/production/',
     filename:'[name]/[name].[hash].js'
   },
   module:{
@@ -104,7 +104,7 @@ module.exports = {
   },
   plugins:[
     new htmlWebpack({
-      filename:__dirname + '/build/index/index.html',
+      filename:__dirname + '/production/index/index.html',
       template:__dirname + '/src/pages/index/index.html',
       chunks:['index'],
       minify:{
@@ -127,7 +127,7 @@ module.exports = {
     new vueLoader(),
     new uglifyjs(),
     new cleanWebpack(
-      ['build'],
+      ['production'],
       {
         root:__dirname,
         exclude:['json'],
@@ -140,7 +140,7 @@ module.exports = {
       minimizer:[new optimizeCss({})],
   },
   devServer:{
-    contentBase:"./build/",
+    contentBase:'./production/',
     openPage:'index',
     historyApiFallback:true,
     inline:true,
