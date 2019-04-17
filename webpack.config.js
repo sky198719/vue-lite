@@ -6,7 +6,6 @@ const cleanWebpack = require('clean-webpack-plugin')
 const optimizeCss = require('optimize-css-assets-webpack-plugin')
 const uglifyjs = require('uglifyjs-webpack-plugin')
 const copyWebpack = require('copy-webpack-plugin')
-// const concatPlugin = require('webpack-concat-plugin')
 
 module.exports = {
   mode:'development',
@@ -117,12 +116,6 @@ module.exports = {
         to:'./lib'
       }
     ]),
-    // new concatPlugin({
-    //   uglify:false,
-    //   outputPath:'lib/js/',
-    //   fileName:'lib.[hash].js',
-    //   filesToConcat:['vue','vue-router','vuex']
-    // }),
     new extractText({filename:'[name]/[name].[hash].css',allChunks:true}),
     new vueLoader(),
     new uglifyjs(),
