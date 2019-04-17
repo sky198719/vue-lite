@@ -114,6 +114,10 @@ module.exports = {
       {
         from:__dirname + '/lib',
         to:'./lib'
+      },
+      {
+        from:__dirname + '/json',
+        to:'./json'
       }
     ]),
     new extractText({filename:'[name]/[name].[hash].css',allChunks:true}),

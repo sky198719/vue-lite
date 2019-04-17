@@ -4,8 +4,8 @@ import qs from 'qs'
 const getData = (params) => {
 	let headers = ''
 	let obj = ''
-	if(params.type == 'file'){
-		params.type = 'post'
+	if(params.method == 'file'){
+		params.method = 'post'
 		obj = params.data
 		headers = {'Content-Type':'multipart/form-data'}
 	}else{
@@ -13,7 +13,7 @@ const getData = (params) => {
 		headers = {'Content-Type':'application/x-www-form-urlencoded'}
 	}
 	return axios({
-		method:params.type,
+		method:params.method,
 		url:params.url,
 		data:obj,
 		headers:headers
@@ -24,6 +24,6 @@ const getData = (params) => {
 	})
 }
 
-const localPath = '/'
+const localInit = window.location.host == 'localhost' ? '/api/' : '/'
 
-export {getData,localPath}
+export {getData,localInit}
