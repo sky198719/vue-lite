@@ -1,22 +1,25 @@
 <template>
-	<div @click="handleClick()" class="cursor">{{$store.state.title}}</div>
+	<div>
+		<input v-model="title" type="text" />
+		<div>{{$store.state.title}}</div>
+	</div>
 </template>
 
 <script>
 export default{
-	mounted(){
-		this.$store.commit('setTitle','click me')
+	data(){
+		return{
+			title:''
+		}
 	},
-	methods:{
-		handleClick(){
-			this.$store.commit('setTitle','welcome')
+	watch:{
+		title(){
+			this.$store.commit('setTitle',this.title)
 		}
 	}
 }
 </script>
 
 <style lang="scss" type="text/css">
-.cursor{
-	cursor:pointer;
-}
+
 </style>

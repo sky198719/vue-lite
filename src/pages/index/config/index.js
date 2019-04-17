@@ -1,29 +1,10 @@
-import Home from './../mods/home/index.vue'
+import route from './route.js'
+import store from './store.js'
 
 const routePath = {
-	routes:[
-		{
-			path:'/home',
-			name:'home',
-			component:Home
-		},
-		{
-			path: '/', 
-			name:'home',
-	        redirect: '/home'
-		}
-	]
+	routes:route
 }
 
-const storeData = {
-	state:{
-		title:''
-	},
-	mutations:{
-		setTitle(state,data){
-			state.title = data
-		}
-	}
-}
+const storeData = store
 
 export {routePath,storeData}
