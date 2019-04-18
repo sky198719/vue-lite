@@ -127,7 +127,6 @@ module.exports = {
       ['production'],
       {
         root:__dirname,
-        exclude:['json'],
         verbose:true,
         dry:false
       }
