@@ -8,7 +8,7 @@ const uglifyjs = require('uglifyjs-webpack-plugin')
 const copyWebpack = require('copy-webpack-plugin')
 
 module.exports = {
-  mode:'development',
+  mode:'production',
   entry:{
     index:'./src/pages/index/index.js'
   },
