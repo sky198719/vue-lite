@@ -1,11 +1,11 @@
 const path = require('path')
-const vueLoader = require('vue-loader/lib/plugin')
-const extractText = require('extract-text-webpack-plugin')
-const htmlWebpack = require('html-webpack-plugin')
-const cleanWebpack = require('clean-webpack-plugin')
-const optimizeCss = require('optimize-css-assets-webpack-plugin')
-const uglifyjs = require('uglifyjs-webpack-plugin')
-const copyWebpack = require('copy-webpack-plugin')
+const vueLoaderPlugin = require('vue-loader/lib/plugin')
+const extractTextPlugin = require('extract-text-webpack-plugin')
+const htmlPlugin = require('html-webpack-plugin')
+const cleanPlugin = require('clean-webpack-plugin')
+const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const uglifyjsPlugin = require('uglifyjs-webpack-plugin')
+const copyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   mode:'production',
@@ -79,7 +79,7 @@ module.exports = {
         loader:'vue-loader',
         options:{
           loaders:{
-            css:extractText.extract({
+            css:extractTextPlugin.extract({
               fallback:'vue-style-loader',
               use:'css-loader'
             })
@@ -88,7 +88,7 @@ module.exports = {
       },
       {
         test:/\.(scss|css)$/,
-        loader:extractText.extract({
+        loader:extractTextPlugin.extract({
           use:[
             'css-loader',
             'sass-loader'
@@ -102,7 +102,7 @@ module.exports = {
     ]
   },
   plugins:[
-    new htmlWebpack({
+    new htmlPlugin({
       filename:__dirname + '/production/index/index.html',
       template:__dirname + '/src/pages/index/index.html',
       chunks:['index'],
@@ -110,7 +110,7 @@ module.exports = {
         collapseWhitespace:true,
       }
     }),
-    new copyWebpack([
+    new copyPlugin([
       {
         from:__dirname + '/lib',
         to:'./lib'
@@ -120,10 +120,17 @@ module.exports = {
         to:'./json'
       }
     ]),
-    new extractText({filename:'[name]/[name].[hash].css',allChunks:true}),
-    new vueLoader(),
-    new uglifyjs(),
-    new cleanWebpack(
+    new extractTextPlugin({filename:'[name]/[name].[hash].css',allChunks:true}),
+    new vueLoaderPlugin(),
+    new uglifyjsPlugin({
+      uglifyOptions:{
+        compress:{
+          warnings:false,
+          // drop_console:true
+        }
+      }
+    }),
+    new cleanPlugin(
       ['production'],
       {
         root:__dirname,
@@ -133,7 +140,7 @@ module.exports = {
     )
   ],
   optimization:{
-      minimizer:[new optimizeCss({})],
+      minimizer:[new optimizeCssAssetsPlugin({})],
   },
   devServer:{
     contentBase:'./production/',
