@@ -8,6 +8,10 @@ const getData = (params) => {
 		params.method = 'post'
 		obj = params.data
 		headers = {'Content-Type':'multipart/form-data'}
+	}else if(params.method == 'body'){
+		params.method = 'post'
+		obj = params.data
+		headers = {'Content-Type':'application/json'}
 	}else{
 		obj = qs.stringify(params.data)
 		headers = {'Content-Type':'application/x-www-form-urlencoded'}
@@ -24,6 +28,6 @@ const getData = (params) => {
 	})
 }
 
-const localInit = window.location.host == 'localhost' ? '/api/' : '/'
+const localInit = window.location.hostname == 'localhost' ? '/api/' : '/'
 
 export {getData,localInit}
