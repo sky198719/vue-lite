@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const vueLoaderPlugin = require('vue-loader/lib/plugin')
 const extractTextPlugin = require('extract-text-webpack-plugin')
 const htmlPlugin = require('html-webpack-plugin')
@@ -110,11 +111,11 @@ module.exports = {
         collapseWhitespace:true,
       }
     }),
+    new webpack.DllReferencePlugin({
+        context:__dirname,
+        manifest:require('./manifest.json')
+    }),
     new copyPlugin([
-      {
-        from:__dirname + '/lib',
-        to:'./lib'
-      },
       {
         from:__dirname + '/json',
         to:'./json'
@@ -125,7 +126,7 @@ module.exports = {
     new uglifyjsPlugin({
       uglifyOptions:{
         compress:{
-          warnings:false,
+          // warnings:false,
           // drop_console:true
         }
       }
@@ -133,6 +134,7 @@ module.exports = {
     new cleanPlugin(
       ['production'],
       {
+        exclude:['global.js'],
         root:__dirname,
         verbose:true,
         dry:false

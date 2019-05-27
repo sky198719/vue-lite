@@ -1,49 +1,17 @@
 {
   "name": "vue-lite",
-  "version": "1.0.6",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack-dev-server  --hot --inline --watch --open",
-    "build": "webpack --mode production"
-  },
-  "author": "",
+  "version": "1.0.15",
+  "description": "Shanghai Chinaunicom only",
+  "author": "Alex Zhang",
   "license": "ISC",
   "repository": {
     "type": "git",
     "url": "https://github.com/sky198719/vue-lite.git"
   },
-  "devDependencies": {
-    "axios": "^0.18.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-es2015": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.19",
-    "copy-webpack-plugin": "^5.0.0",
-    "css-loader": "^1.0.0",
-    "echarts": "^4.2.0-rc.2",
-    "element-ui": "^2.4.8",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "file-loader": "^2.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "jquery": "^3.3.1",
-    "node-sass": "^4.11.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.0",
-    "uglifyjs-webpack-plugin": "^2.0.1",
-    "url-loader": "^1.1.1",
-    "vue": "^2.5.17",
-    "vue-loader": "^15.4.2",
-    "vue-router": "^3.0.1",
-    "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.5.17",
-    "vuex": "^3.0.1",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.3.1"
-  },
   "dependencies": {
-    "resolve": "^1.8.1"
+    "fs": "0.0.1-security"
+  },
+  "bin": {
+    "vue-lite": "index.js"
   }
 }
