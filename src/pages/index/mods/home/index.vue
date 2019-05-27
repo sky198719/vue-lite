@@ -51,5 +51,7 @@ export default{
 </script>
 
 <style lang="scss" type="text/css">
-
+input{
+	background:red;
+}
 </style>

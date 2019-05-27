@@ -147,6 +147,7 @@ module.exports = {
     openPage:'index',
     historyApiFallback:true,
     inline:true,
+    progress:true,
     hot:true,
     // proxy:{
     //   '/api':{
