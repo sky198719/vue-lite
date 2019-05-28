@@ -4,8 +4,8 @@ var fs = require('fs')
 var copy = function(src,dst){
     let paths = fs.readdirSync(src)
     paths.forEach(function(path){
-        var _src=src+'/'+path
-        var _dst=dst+'/'+path
+        var _src = src + '/' + path
+        var _dst = dst + '/' + path
         fs.stat(_src,function(err,stats){
             if(err){
                 throw err
@@ -29,7 +29,7 @@ var checkDirectory = function(src,dst,callback){
         }else{
             callback(src,dst)
         }
-      })
+    })
 }
  
 const SOURCES_DIRECTORY = __dirname + '\\project'
