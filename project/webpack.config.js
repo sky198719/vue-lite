@@ -6,7 +6,6 @@ const htmlPlugin = require('html-webpack-plugin')
 const cleanPlugin = require('clean-webpack-plugin')
 const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const uglifyjsPlugin = require('uglifyjs-webpack-plugin')
-const copyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   mode:'production',
@@ -115,12 +114,6 @@ module.exports = {
         context:__dirname,
         manifest:require('./manifest.json')
     }),
-    new copyPlugin([
-      {
-        from:__dirname + '/json',
-        to:'./json'
-      }
-    ]),
     new extractTextPlugin({filename:'[name]/[name].[hash].css',allChunks:true}),
     new vueLoaderPlugin(),
     new uglifyjsPlugin({
