@@ -6,11 +6,13 @@ const htmlPlugin = require('html-webpack-plugin')
 const cleanPlugin = require('clean-webpack-plugin')
 const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const uglifyjsPlugin = require('uglifyjs-webpack-plugin')
+const copyPlugin = require('copy-webpack-plugin')
+require('babel-polyfill')
 
 module.exports = {
   mode:'production',
   entry:{
-    index:'./src/pages/index/index.js'
+    index:['babel-polyfill','./src/pages/index/index.js']
   },
   output:{
     path:__dirname + '/production/',
@@ -23,7 +25,7 @@ module.exports = {
         use:[{
           loader:'url-loader',
           options:{
-            limit:1024,
+            limit:10240,
             outputPath:'static/images',
             publicPath:'../static/images',
             name:'[hash].[ext]'
@@ -124,10 +126,13 @@ module.exports = {
         }
       }
     }),
+    new copyPlugin([
+      {from:'src/mock',to:'mock'}
+    ]),
     new cleanPlugin(
       ['production'],
       {
-        exclude:['global.js'],
+        exclude:['global.js','json'],
         root:__dirname,
         verbose:true,
         dry:false
