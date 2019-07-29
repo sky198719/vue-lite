@@ -5,7 +5,9 @@ const vendor = [
 	'vue',
 	'vue-router',
 	'vuex',
-	'axios'
+	'axios',
+	'qs',
+	'babel-polyfill'
 ]
 
 module.exports = {
