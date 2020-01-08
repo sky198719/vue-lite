@@ -5,13 +5,12 @@
 </template>
 
 <script>
-import {getData} from './../../../../assets/js/global.js'
 import Title from './../../../../components/title/index.vue'
 
 export default{
 	data(){
 		return{
-			titleData:{}
+			titleData:{},
 		}
 	},
 	components:{
@@ -19,7 +18,7 @@ export default{
 	},
 	methods:{
 		initData(){
-			getData({method:'get',url:'/mock/data.json'})
+			this.getData({method:'get',url:'/mock/data.json'})
 			.then((res) => {
 				this.$store.commit('setTitle',res.data)
 			})
