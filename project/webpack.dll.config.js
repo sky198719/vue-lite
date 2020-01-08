@@ -1,14 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
-
-const vendor = [
-	'vue',
-	'vue-router',
-	'vuex',
-	'axios',
-	'qs',
-	'babel-polyfill'
-]
+const config = require('./config.js')
+const vendor = config.vendor
 
 module.exports = {
 	entry:{

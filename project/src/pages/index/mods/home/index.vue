@@ -1,42 +1,46 @@
 <template>
 	<div>
-		<input type="text" v-model="title" />
-		<div>{{$store.state.title}}</div>
-		<div>{{tempData}}</div>
+		<Title :titleData="titleData"></Title>
 	</div>
 </template>
 
 <script>
 import {getData} from './../../../../assets/js/global.js'
+import Title from './../../../../components/title/index.vue'
 
 export default{
 	data(){
 		return{
-			title:'',
-			tempData:''
+			titleData:{}
 		}
+	},
+	components:{
+		Title:Title
 	},
 	methods:{
 		initData(){
-			getData({method:'get',url:'/mock/test.json'})
+			getData({method:'get',url:'/mock/data.json'})
 			.then((res) => {
-				this.tempData = res.data
+				this.$store.commit('setTitle',res.data)
 			})
 		}
 	},
 	mounted(){
 		this.initData()
 	},
+	computed:{
+		title(){
+			return this.$store.state.title
+		}
+	},
 	watch:{
 		title(){
-			this.$store.commit('setTitle',this.title)
+			this.$set(this.titleData,'title',this.$store.state.title)
 		}
 	}
 }
 </script>
 
 <style lang="scss" type="text/css">
-input{
-	background:none;
-}
+
 </style>

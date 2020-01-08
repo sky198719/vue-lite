@@ -1,0 +1,19 @@
+module.exports = {
+	vendor:[
+		'vue',
+		'vue-router',
+		'vuex',
+		'axios',
+		'qs',
+		'babel-polyfill'
+	],
+	html:[
+		'index'
+	],
+	api:[
+		{
+			name:'',
+			url:''
+		}
+	]
+}
