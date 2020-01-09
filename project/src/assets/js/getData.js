@@ -24,7 +24,9 @@ export default{
 				data:obj,
 				headers:headers
 			})
-			.then((res) => res.data)
+			.then((res) => {
+				return res.data
+			})
 			.catch((err) => {
 				console.log('网络异常，请重试')
 			})

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack-dev-server  --hot --inline --watch --open",
+    "start": "webpack-dev-server --watch --open",
     "build": "webpack --mode production",
     "init": "npm init&npm install&webpack --config webpack.dll.config.js",
     "update": "webpack --config webpack.dll.config.js"
@@ -20,12 +20,12 @@
     "echarts": "^4.2.0-rc.2",
     "element-ui": "^2.4.8",
     "express": "^4.16.4",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
     "file-stream-rotator": "^0.4.1",
     "fs": "0.0.1-security",
     "html-webpack-plugin": "^3.2.0",
     "jquery": "^3.3.1",
+    "mini-css-extract-plugin": "^0.9.0",
     "morgan": "^1.9.1",
     "multiparty": "^4.2.1",
     "mysql": "^2.16.0",
@@ -36,6 +36,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.0",
     "uglifyjs-webpack-plugin": "^2.0.1",
+    "unicom-ui": "^1.0.0",
     "url-loader": "^1.1.1",
     "vue": "^2.5.17",
     "vue-loader": "^15.4.2",
@@ -52,5 +53,6 @@
   "main": "config.js",
   "author": "",
   "license": "ISC",
+  "devDependencies": {},
   "description": ""
 }

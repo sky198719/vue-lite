@@ -5,16 +5,11 @@
 </template>
 
 <script>
-import Title from './../../../../components/title/index.vue'
-
 export default{
 	data(){
 		return{
 			titleData:{},
 		}
-	},
-	components:{
-		Title:Title
 	},
 	methods:{
 		initData(){
