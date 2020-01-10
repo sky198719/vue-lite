@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const config = require('./config.js')
+const config = require('./src/config/index.js')
 const vendor = config.vendor
 
 module.exports = {
