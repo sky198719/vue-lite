@@ -26,7 +26,8 @@ for(let i = 0 ; i < html.length ; i ++){
 htmlPoint.push(new webpack.DllReferencePlugin({context:__dirname,manifest:require('./manifest.json')}))
 htmlPoint.push(new miniCssExtractPlugin({filename:'[name]/[name].[hash].css'}))
 htmlPoint.push(new vueLoaderPlugin())
-htmlPoint.push(new uglifyjsPlugin({uglifyOptions:{compress:{}}}))
+htmlPoint.push(new uglifyjsPlugin())
+htmlPoint.push(new optimizeCssAssetsPlugin())
 htmlPoint.push(new copyPlugin([{from:'src/mock',to:'mock'}]))
 htmlPoint.push(new cleanPlugin(['production'],{exclude:['global.js','json'],root:__dirname,verbose:true,dry:false}))
 entryPoint = '{' + entryPoint + '}'
@@ -42,11 +43,9 @@ apiPoint = '{' + apiPoint + '}'
 apiPoint = eval('(' + apiPoint + ')')
 
 module.exports = {
-	mode:'development',
 	stats:{
 		children:false
 	},
-	devtool:'eval-source-map',
 	entry:entryPoint,
 	output:{
 		path:__dirname + '/production/',
@@ -143,9 +142,6 @@ module.exports = {
 		]
 	},
 	plugins:htmlPoint,
-	optimization:{
-		minimizer:[new optimizeCssAssetsPlugin({})],
-	},
 	devServer:{
 		contentBase:'./production/',
 		openPage:'index',

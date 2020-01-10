@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack-dev-server --watch --open",
+    "start": "webpack-dev-server --mode development --watch --open",
     "build": "webpack --mode production",
     "init": "npm init&npm install&webpack --config webpack.dll.config.js",
     "update": "webpack --config webpack.dll.config.js"
