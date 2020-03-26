@@ -21,6 +21,7 @@ export default{
 	},
 	mounted(){
 		this.initData()
+		console.log(this.initUrl)
 	},
 	computed:{
 		title(){

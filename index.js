@@ -2,7 +2,7 @@
 
 var fs = require('fs')
 var copy = function(src,dst){
-    let paths = fs.readdirSync(src)
+    var paths = fs.readdirSync(src)
     paths.forEach(function(path){
         var _src = src + '/' + path
         var _dst = dst + '/' + path
@@ -11,8 +11,8 @@ var copy = function(src,dst){
                 throw err
             }
             if(stats.isFile()){
-                let readable = fs.createReadStream(_src)
-                let writable = fs.createWriteStream(_dst)
+                var readable = fs.createReadStream(_src)
+                var writable = fs.createWriteStream(_dst)
                 readable.pipe(writable)
             }else if(stats.isDirectory()){
                 checkDirectory(_src,_dst,copy);

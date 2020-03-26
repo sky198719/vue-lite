@@ -1,5 +1,5 @@
 <template>
-	<div class="titleData">
+	<div class="title">
 		<span>{{titleData.title}}</span>
 		<img src="./../../assets/images/demo.jpg" />
 	</div>
@@ -14,7 +14,7 @@ export default{
 </script>
 
 <style lang="scss" type="text/css">
-.titleData{
+.title{
 	width:500px;
 	margin:0 auto;
 	img{
