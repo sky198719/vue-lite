@@ -1,10 +1,10 @@
 const state = {
-	title:''
+	test:''
 }
 
 const mutations = {
-	setTitle(state,data){
-		state.title = data
+	setTest(state,data){
+		state.test = data
 	}
 }
 

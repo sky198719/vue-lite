@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Title :titleData="titleData"></Title>
+		<Test :testData="testData"></Test>
 	</div>
 </template>
 
@@ -8,14 +8,14 @@
 export default{
 	data(){
 		return{
-			titleData:{},
+			testData:{},
 		}
 	},
 	methods:{
 		initData(){
-			this.getData({method:'get',url:'/mock/data.json'})
+			this.getData({method:'get',url:'/static/mock/test.json'})
 			.then((res) => {
-				this.$store.commit('setTitle',res.data)
+				this.$store.commit('setTest',res.data)
 			})
 		}
 	},
@@ -24,13 +24,13 @@ export default{
 		console.log(this.initUrl)
 	},
 	computed:{
-		title(){
-			return this.$store.state.title
+		test(){
+			return this.$store.state.test
 		}
 	},
 	watch:{
-		title(){
-			this.$set(this.titleData,'title',this.$store.state.title)
+		test(){
+			this.$set(this.testData,'title',this.$store.state.test)
 		}
 	}
 }

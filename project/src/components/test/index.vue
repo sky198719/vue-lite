@@ -1,20 +1,20 @@
 <template>
-	<div class="title">
-		<span>{{titleData.title}}</span>
-		<img src="./../../assets/images/demo.jpg" />
+	<div class="test">
+		<span>{{testData.title}}</span>
+		<img src="./../../assets/images/test.jpg" />
 	</div>
 </template>
 
 <script>
 export default{
 	props:{
-		titleData:{}
+		testData:{}
 	}
 }
 </script>
 
 <style lang="scss" type="text/css">
-.title{
+.test{
 	width:500px;
 	margin:0 auto;
 	img{

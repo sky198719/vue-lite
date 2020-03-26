@@ -1,7 +1,7 @@
-import Title from './title/index.vue'
+import Test from './test/index.vue'
 
 const Components = (Vue) => {
-	Vue.component('Title',Title)
+	Vue.component('Test',Test)
 }
 
 export default Components

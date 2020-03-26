@@ -28,7 +28,7 @@ htmlPoint.push(new miniCssExtractPlugin({filename:'[name]/[name].[hash].css'}))
 htmlPoint.push(new vueLoaderPlugin())
 htmlPoint.push(new uglifyjsPlugin())
 htmlPoint.push(new optimizeCssAssetsPlugin())
-htmlPoint.push(new copyPlugin([{from:'src/mock',to:'mock'}]))
+htmlPoint.push(new copyPlugin([{from:'src/static/mock',to:'static/mock'},{from:'src/static/lib',to:'static/lib'}]))
 htmlPoint.push(new cleanPlugin(['production'],{exclude:['global.js','json'],root:__dirname,verbose:true,dry:false}))
 entryPoint = '{' + entryPoint + '}'
 entryPoint = eval('(' + entryPoint + ')')
@@ -144,11 +144,13 @@ module.exports = {
 	plugins:htmlPoint,
 	devServer:{
 		contentBase:'./production/',
+		open:true,
 		openPage:'index',
 		historyApiFallback:true,
 		inline:true,
 		progress:true,
 		hot:true,
+		overlay:true,
 		proxy:apiPoint
 	}
 }
