@@ -14,6 +14,7 @@ const api = config.api
 let entryPoint = ''
 let htmlPoint = []
 let apiPoint = ''
+let sourcemap = process.env.CURRENT_ENT == 'production' ? '' : 'eval-source-map'
 htmlPoint.push(new webpack.HotModuleReplacementPlugin())
 for(let i = 0 ; i < html.length ; i ++){
 	if(i == html.length - 1){
@@ -26,10 +27,14 @@ for(let i = 0 ; i < html.length ; i ++){
 htmlPoint.push(new webpack.DllReferencePlugin({context:__dirname,manifest:require('./manifest.json')}))
 htmlPoint.push(new miniCssExtractPlugin({filename:'[name]/[name].[hash].css'}))
 htmlPoint.push(new vueLoaderPlugin())
-htmlPoint.push(new uglifyjsPlugin())
-htmlPoint.push(new optimizeCssAssetsPlugin())
+if(process.env.CURRENT_ENT == 'production'){
+	htmlPoint.push(new uglifyjsPlugin())
+	htmlPoint.push(new optimizeCssAssetsPlugin())
+}
 htmlPoint.push(new copyPlugin([{from:'src/static/mock',to:'static/mock'},{from:'src/static/lib',to:'static/lib'}]))
-htmlPoint.push(new cleanPlugin(['production'],{exclude:['global.js','json'],root:__dirname,verbose:true,dry:false}))
+if(process.env.CURRENT_ENT == 'production'){
+	htmlPoint.push(new cleanPlugin(['production'],{exclude:['global.js','json'],root:__dirname,verbose:true,dry:false}))
+}
 entryPoint = '{' + entryPoint + '}'
 entryPoint = eval('(' + entryPoint + ')')
 for(let i = 0 ; i < api.length ; i ++){
@@ -42,7 +47,12 @@ for(let i = 0 ; i < api.length ; i ++){
 apiPoint = '{' + apiPoint + '}'
 apiPoint = eval('(' + apiPoint + ')')
 
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
+	devtool:sourcemap,
 	stats:{
 		children:false
 	},
@@ -50,6 +60,11 @@ module.exports = {
 	output:{
 		path:__dirname + '/production/',
 		filename:'[name]/[name].[hash].js'
+	},
+	resolve: {
+		alias: {
+      		'@': resolve('src')
+		}
 	},
 	module:{
 		rules:[
@@ -135,9 +150,13 @@ module.exports = {
 			},
 			{
 				test:/\.js$/,
-				use:[
-					'babel-loader'
-				]
+				exclude: /(node_modules|bower_components)/,
+			      use: {
+			        loader: 'babel-loader',
+			        options: {
+			          presets: ['@babel/preset-env']
+			        }
+			    }
 			}
 		]
 	},
