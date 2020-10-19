@@ -61,9 +61,9 @@ module.exports = {
 		path:__dirname + '/production/',
 		filename:'[name]/[name].[hash].js'
 	},
-	resolve: {
-		alias: {
-      		'@': resolve('src')
+	resolve:{
+		alias:{
+      		'@':resolve('src')
 		}
 	},
 	module:{
@@ -150,11 +150,11 @@ module.exports = {
 			},
 			{
 				test:/\.js$/,
-				exclude: /(node_modules|bower_components)/,
-			      use: {
-			        loader: 'babel-loader',
-			        options: {
-			          presets: ['@babel/preset-env']
+				exclude:/(node_modules|bower_components)/,
+			      use:{
+			        loader:'babel-loader',
+			        options:{
+			          presets:['@babel/preset-env']
 			        }
 			    }
 			}
