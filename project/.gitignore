@@ -1,4 +1,4 @@
 node_modules/
 production/
-package-lock.json
 manifest.json
+package-lock.json

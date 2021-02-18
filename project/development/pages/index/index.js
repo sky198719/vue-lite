@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import getData from './../../assets/js/getData.js'
-import initUrl from './../../assets/js/initUrl.js'
 import Components from './../../components/index.js'
 
 import './../../assets/css/global.scss'
@@ -13,7 +12,6 @@ import {routePath,storeData} from './config/index.js'
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(getData)
-Vue.use(initUrl)
 Vue.use(Components)
 
 const router = new VueRouter(routePath)

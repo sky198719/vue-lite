@@ -13,7 +13,7 @@ export default{
 	},
 	methods:{
 		initData(){
-			this.getData({method:'get',url:'/static/mock/test.json'})
+			this.getData({method:'get',url:'/mock/test.json'})
 			.then((res) => {
 				this.$store.commit('setTest',res.data)
 			})
@@ -21,7 +21,6 @@ export default{
 	},
 	mounted(){
 		this.initData()
-		console.log(this.initUrl)
 	},
 	computed:{
 		test(){

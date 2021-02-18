@@ -12,15 +12,19 @@ module.exports = {
 	html:[
 		'index'
 	],
+	// 局部打包多个单页面，目录名称保持统一
+	buildHtml:[
+		'index'
+	],
 	// 配置反向代理，可配置多个
 	api:[
 		{
-			name:'',
-			url:''
+			name:'static',
+			url:'/static'
 		}
 	],
 	// 测试环境访问前缀
-	devUrl:'/api/',
+	devUrl:'/static',
 	// 生产环境访问前缀
 	proUrl:'/'
 }

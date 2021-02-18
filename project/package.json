@@ -1,8 +1,10 @@
 {
   "scripts": {
-    "start": "set CURRENT_ENT=development&webpack-dev-server --mode development",
-    "build": "set CURRENT_ENT=production&webpack --config webpack.dll.config.js&webpack --mode production",
-    "init": "npm init&npm install&webpack --config webpack.dll.config.js",
+    "start": "set CURRENT_ENT=development&set CURRENT_BUILD=build&webpack-dev-server --mode development",
+    "build": "set CURRENT_ENT=production&set CURRENT_BUILD=build&webpack --config webpack.dll.config.js&webpack --config webpack.config.js --mode production",
+    "partbuild": "set CURRENT_ENT=production&set CURRENT_BUILD=partbuild&webpack --config webpack.config.js --mode production",
+    "init": "npm init&npm install&webpack --config webpack.dll.config.js&touch .gitignore&(echo node_modules/&echo production/&echo manifest.json&echo package-lock.json)>.gitignore",
+    "use": "npm install&webpack --config webpack.dll.config.js",
     "update": "webpack --config webpack.dll.config.js"
   },
   "dependencies": {
@@ -36,16 +38,5 @@
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.3.1"
-  },
-  "name": "project",
-  "version": "1.0.0",
-  "main": "webpack.config.js",
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "http://30.1.1.124:6003/gitlab/VMS/vms-web.git"
-  },
-  "description": ""
+  }
 }

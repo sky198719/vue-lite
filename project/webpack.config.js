@@ -8,21 +8,23 @@ const uglifyjsPlugin = require('uglifyjs-webpack-plugin')
 const copyPlugin = require('copy-webpack-plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
 require('babel-polyfill')
-const config = require('./src/config/index.js')
+const config = require('./development/config/index.js')
 const html = config.html
+const buildHtml = config.buildHtml
 const api = config.api
 let entryPoint = ''
 let htmlPoint = []
 let apiPoint = ''
 let sourcemap = process.env.CURRENT_ENT == 'production' ? '' : 'eval-source-map'
+let currentBuild = process.env.CURRENT_BUILD == 'build' ? html : buildHtml
 htmlPoint.push(new webpack.HotModuleReplacementPlugin())
-for(let i = 0 ; i < html.length ; i ++){
-	if(i == html.length - 1){
-		entryPoint += html[i] + ":['babel-polyfill','./src/pages/" + html[i] + "/index.js']"
+for(let i = 0 ; i < currentBuild.length ; i ++){
+	if(i == currentBuild.length - 1){
+		entryPoint += currentBuild[i] + ":['babel-polyfill','./development/pages/" + currentBuild[i] + "/index.js']"
 	}else{
-		entryPoint += html[i] + ":['babel-polyfill','./src/pages/" + html[i] + "/index.js'],"
+		entryPoint += currentBuild[i] + ":['babel-polyfill','./development/pages/" + currentBuild[i] + "/index.js'],"
 	}
-	htmlPoint.push(new htmlPlugin({filename:__dirname + '/production/' + html[i] + '/index.html',template:__dirname + '/src/pages/' + html[i] + '/index.html',chunks:[html[i]],minify:{collapseWhitespace:true}}))
+	htmlPoint.push(new htmlPlugin({filename:__dirname + '/production/' + currentBuild[i] + '/index.html',template:__dirname + '/development/pages/' + currentBuild[i] + '/index.html',chunks:[currentBuild[i]],minify:{collapseWhitespace:true}}))
 }
 htmlPoint.push(new webpack.DllReferencePlugin({context:__dirname,manifest:require('./manifest.json')}))
 htmlPoint.push(new miniCssExtractPlugin({filename:'[name]/[name].[hash].css'}))
@@ -31,9 +33,17 @@ if(process.env.CURRENT_ENT == 'production'){
 	htmlPoint.push(new uglifyjsPlugin())
 	htmlPoint.push(new optimizeCssAssetsPlugin())
 }
-htmlPoint.push(new copyPlugin([{from:'src/static/mock',to:'static/mock'},{from:'src/static/lib',to:'static/lib'}]))
+htmlPoint.push(new copyPlugin([{from:'development/static/mock',to:'static/mock'},{from:'development/static/lib',to:'static/lib'}]))
 if(process.env.CURRENT_ENT == 'production'){
-	htmlPoint.push(new cleanPlugin(['production'],{exclude:['global.js','json'],root:__dirname,verbose:true,dry:false}))
+	let removeBuild = []
+	for(let i = 0 ; i < currentBuild.length ; i ++){
+		removeBuild.push('production/' + currentBuild[i])
+	}
+	removeBuild.push('production/static')
+	if(process.env.CURRENT_BUILD == 'build'){
+		removeBuild = ['production']
+	}
+	htmlPoint.push(new cleanPlugin(removeBuild,{exclude:['global.js'],root:__dirname,verbose:true,dry:false}))
 }
 entryPoint = '{' + entryPoint + '}'
 entryPoint = eval('(' + entryPoint + ')')
@@ -63,7 +73,7 @@ module.exports = {
 	},
 	resolve:{
 		alias:{
-      		'@':resolve('src')
+      		'@':resolve('development')
 		}
 	},
 	module:{
