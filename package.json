@@ -1,9 +1,15 @@
 {
   "name": "vue-lite",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "",
   "author": "Alex Zhang",
   "license": "ISC",
+  "keywords": [
+    "vue-lite",
+    "vue",
+    "vuejs",
+    "webpack"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/sky198719/vue-lite.git"
