@@ -1,13 +1,15 @@
 {
   "name": "vue-lite",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "",
   "author": "Alex Zhang",
   "license": "ISC",
   "keywords": [
     "vue-lite",
     "vue",
-    "vuejs",
+    "vue-router",
+    "vuex",
+    "sass",
     "webpack"
   ],
   "repository": {
